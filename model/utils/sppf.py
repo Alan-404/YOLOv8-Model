@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 from .conv import Conv
-device = torch.device('cuda' if torch.cuda.is_available() else "cpu")
+
 class SPPF(nn.Module):
     def __init__(self, channels: int, kernel_size: int = 1, stride: int = 1, padding: int = 0):
         super().__init__()
@@ -13,7 +13,7 @@ class SPPF(nn.Module):
         self.concat = torch.concat
 
         self.final_conv = Conv(in_channels=channels*4, out_channels=channels, kernel_size=kernel_size, stride=stride, padding=padding)
-        self.to(device)
+
 
     def forward(self, x: torch.Tensor):
         x = self.conv(x)

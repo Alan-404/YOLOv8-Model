@@ -1,8 +1,6 @@
 import torch
 import torch.nn as nn
 
-device = torch.device('cuda' if torch.cuda.is_available() else "cpu")
-
 class Split(nn.Module):
     def __init__(self):
         super().__init__()

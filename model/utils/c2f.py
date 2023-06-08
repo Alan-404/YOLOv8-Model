@@ -6,8 +6,6 @@ from .split import Split
 from .conv import Conv
 from .bottle_neck import BottleNeck
 
-device = torch.device('cuda' if torch.cuda.is_available() else "cpu")
-
 
 class C2F(nn.Module):
     def __init__(self, in_channels: int, out_channels: int, n_bottles: float, shortcut: bool):
@@ -22,9 +20,6 @@ class C2F(nn.Module):
         self.concat = torch.concat
 
         self.final_conv = Conv(in_channels=(out_channels//2)*(n_bottles+2), out_channels=out_channels, kernel_size=1, stride=1, padding=0)
-
-        self.to(device)
-
     def forward(self, x: torch.Tensor):
         x = self.conv(x)
         out1, out2 = self.split(x)
